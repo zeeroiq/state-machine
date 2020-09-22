@@ -1,4 +1,8 @@
 /*
+ * Created by zeeroiq on 9/22/20, 7:02 AM.
+ */
+
+/*
  * Created by zeeroiq on 9/21/20, 9:08 PM.
  */
 
@@ -6,7 +10,7 @@
  * Created by zeeroiq on 9/21/20, 9:08 PM.
  */
 
-package com.shri.statemachine.domain;
+package com.shri.statemachine.domain.enums;
 
 public enum PaymentState {
     NEW(0),

@@ -1,16 +1,21 @@
 /*
+ * Created by zeeroiq on 9/22/20, 7:02 AM.
+ */
+
+/*
  * Created by zeeroiq on 9/21/20, 9:08 PM.
  */
 
-package com.shri.statemachine.domain;
+package com.shri.statemachine.domain.enums;
 
 public enum PaymentEvent {
 
-    NEW(1),
-    PRE_AUTH(2),
-    PRE_AUTH_ERROR(3),
-    ATU(4),
-    AUTH_ERROR(5);
+    PRE_AUTHORIZE(1),
+    PRE_AUTH_APPROVED(2),
+    PRE_AUTH_DECLINED(3),
+    AUTHORIZE(4),
+    AUTH_APPROVED(5),
+    AUTH_DECLINED(6);
 
     private Integer event;
 
