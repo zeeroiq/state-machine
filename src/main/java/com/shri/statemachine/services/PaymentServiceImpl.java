@@ -8,6 +8,7 @@ import com.shri.statemachine.domain.Payment;
 import com.shri.statemachine.domain.enums.PaymentEvent;
 import com.shri.statemachine.domain.enums.PaymentState;
 import com.shri.statemachine.repositories.PaymentRepository;
+import com.shri.statemachine.services.listener.PaymentStateChangeListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
@@ -25,6 +26,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final StateMachineFactory<PaymentState, PaymentEvent> factory;
+    private final PaymentStateChangeListener stateChangeListener;
 
     @Override
     public Payment newPayment(Payment payment) {
@@ -66,6 +68,7 @@ public class PaymentServiceImpl implements PaymentService {
         sm.stop();
         sm.getStateMachineAccessor()
                 .doWithAllRegions(sma -> {
+                    sma.addStateMachineInterceptor(stateChangeListener);
                     sma.resetStateMachine(new DefaultStateMachineContext<>(payment.getState(), null, null, null));
                 });
         sm.start();
